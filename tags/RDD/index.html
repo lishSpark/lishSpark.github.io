@@ -7,7 +7,7 @@
     
 
     <title>
-      归档 
+      标签: RDD 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -18,13 +18,12 @@
 
     <meta name="description">
 <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="http://yoursite.com/archive/index.html">
+<meta property="og:title" content="标签: RDD">
+<meta property="og:url" content="http://yoursite.com/tags/RDD/index.html">
 <meta property="og:site_name" content="lish's blog">
 <meta property="og:description">
-<meta property="og:updated_time" content="2016-04-26T10:59:28.312Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="归档">
+<meta name="twitter:title" content="标签: RDD">
 <meta name="twitter:description">
     
     
@@ -189,63 +188,48 @@ classes that you can use:
         <div class="content-wrapper__inner entry">
             
 
-<article class="post-container post-container--single">
 
-  <header class="post-header">
+  <h1 class="archive-title">标签: RDD</h1>
+  <hr class="post-list__divider" />
+
+
+<div class="main-post-list">
+    <ol class="post-list">
     
-    <h1 class="post-title">归档</h1>
+    
+    <li>
 
-    <section id="post-content" class="article-content post">
+      <h2 class="post-list__post-title post-title">
+        <a href="/2016/05/16/Spark-RDD/" title="link to Spark-RDD">Spark-RDD</a>
+      </h2>
+
+      <div class="post-list__meta">
+
+        <time datetime="2016-05-16" class="post-list__meta--date date">2016-05-16</time> 
+      </div>
+
+      <div class="excerpt">
         
-    </section>
-
-
-  </header>
-
-</article>
-
-<div class="archive-meta">
-
-
-    <h3>分类</h3>
-
-    <div class="categorieslist">
+          <h1 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h1><p>弹性分布式数据集，分布式元素集合，在Spark中，对数据的所有操作不外乎为创建RDD，转化已有的RDD，调用RDD操作进行求值。</p>
+<h2 id="RDD与Mapreduce"><a href="#RDD与Mapreduce" class="headerlink" title="RDD与Mapreduce"></a>RDD与Mapreduce</h2><p>Hadoop Mapreduce<br>1.不适于大量的迭代<br>2.不适于交互式查询<br>基于数据流方式不能复用曾经的结果或中间计算结果<br>RDD<br>1.自动进行内存，磁盘切换<br>2.高效容错<br>3.Task失败，会进行特定次数的重试<br>4.Stage失败，会自动进行特定次数的重试<br>5.只会计算失败的分片<br>6.checkpoint persist<br>7.数据分配的高度弹性 </p>
+<h2 id="RDD为何高效"><a href="#RDD为何高效" class="headerlink" title="RDD为何高效"></a>RDD为何高效</h2><p>RDD是不可变集合类型，且操作为lazy<br>RDD的写操作为粗粒度，读操作可以是粗粒度也可为细粒度<br>所有的RDD操作都返回迭代器，可以让框架集成<br>
         
-          
-            <span><a href="/categories/Spark/" title="Spark">Spark<sup>4</sup></a></span>
-          
-        
-     </div>
+      </div>
 
+      <hr class="post-list__divider" />
+    </li>
+    
+  </ol>
 
+  <hr class="post-list__divider " />
 
-    <h3>标签</h3>
-    <div class="tagslist">
-        
-            
-                <span><a href="/tags/Spark开发/" title="Spark开发">Spark开发<sup>3</sup></a></span>
-            
-        
-            
-                <span><a href="/tags/Scala/" title="Scala">Scala<sup>1</sup></a></span>
-            
-        
-            
-                <span><a href="/tags/RDD/" title="RDD">RDD<sup>1</sup></a></span>
-            
-        
-            
-                <span><a href="/tags/Spark部署/" title="Spark部署">Spark部署<sup>1</sup></a></span>
-            
-        
-    </div>
+<nav class="pagination" role="navigation">
+    
 
-
-
-    <h3>归档</h3>
-    <div class="archiveslist">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">5</span></li></ul>
-    </div>
+    <span class="pagination__page-number"> 1 / 1</span>
+    
+    
+</nav>
 
 
 </div>
