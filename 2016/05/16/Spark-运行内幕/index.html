@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Spark-运行内幕 | lish&#39;s blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="lish">
+    
+    
+
+    <meta name="description" content="运行内幕1.Driver创建DAGScheduler,TaskScheduler,在实例化过程中，注册当前程序给master,master接受注册，分配资源；一般情况下，当通过Action触发job,SparkContext会通过DAGScheduler来把job中的RDD构成的DAG划分为不同的Stage，每个Stage内部是一系列业务逻辑完全相同，处理数据不同的Tasks，构成TaskSet,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark-运行内幕 | lish's blog">
+<meta property="og:url" content="http://yoursite.com/2016/05/16/Spark-运行内幕/index.html">
+<meta property="og:site_name" content="lish's blog">
+<meta property="og:description" content="运行内幕1.Driver创建DAGScheduler,TaskScheduler,在实例化过程中，注册当前程序给master,master接受注册，分配资源；一般情况下，当通过Action触发job,SparkContext会通过DAGScheduler来把job中的RDD构成的DAG划分为不同的Stage，每个Stage内部是一系列业务逻辑完全相同，处理数据不同的Tasks，构成TaskSet,">
+<meta property="og:image" content="http://yoursite.com/images/spark整体架构.png">
+<meta property="og:updated_time" content="2016-05-16T07:39:49.936Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark-运行内幕 | lish's blog">
+<meta name="twitter:description" content="运行内幕1.Driver创建DAGScheduler,TaskScheduler,在实例化过程中，注册当前程序给master,master接受注册，分配资源；一般情况下，当通过Action触发job,SparkContext会通过DAGScheduler来把job中的RDD构成的DAG划分为不同的Stage，每个Stage内部是一系列业务逻辑完全相同，处理数据不同的Tasks，构成TaskSet,">
+<meta name="twitter:image" content="http://yoursite.com/images/spark整体架构.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">lish&#39;s blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          welcome to here
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/loveCanopy" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Spark-运行内幕</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-05-16" class="post-meta__date date">2016-05-16</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Spark/">Spark</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/Spark开发/">Spark开发</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h1 id="运行内幕"><a href="#运行内幕" class="headerlink" title="运行内幕"></a>运行内幕</h1><p>1.Driver创建DAGScheduler,TaskScheduler,在实例化过程中，注册当前程序给master,master接受注册，分配资源；一般情况下，当通过Action触发job,SparkContext会通过DAGScheduler来把job中的RDD构成的DAG划分为不同的Stage，每个Stage内部是一系列业务逻辑完全相同，处理数据不同的Tasks，构成TaskSet,而TaskScheduler和SchedulerBackend负责具体Task运行。<br><a id="more"></a><br>2.Master：接受用户提交的程序并发送指令给Worker，为当前程序分配计算资源，每个worker所在的节点，默认为当前程序分配一个executor,executor通过线程池并发执行，Master通知worker按要求启动executor;通过Proxy为executorRunner进程启动executorBackend,通过TaskRunner来封装Task,然后从线程池获取一条，执行Task;最后一个Stage中Task为ResultTask产生Job结果<br><img src="/images/spark整体架构.png" alt="spark整体架构"></p>
+<h2 id="相关名词"><a href="#相关名词" class="headerlink" title="相关名词"></a>相关名词</h2><h3 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h3><p>客户端进程，负责提交作业到Master</p>
+<h3 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h3><p>真正执行作业的地方，一个集群一般包含多个Executor，每个Executor接收Driver的命令Launch Task，一个Executor可以执行一到多个Task。</p>
+<h3 id="Stage"><a href="#Stage" class="headerlink" title="Stage"></a>Stage</h3><p>一个Spark作业一般包含一到多个Stage</p>
+<h3 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h3><p>一个Stage包含一到多个Task，通过多个Task实现并行运行的功能</p>
+<h3 id="DAGScheduler"><a href="#DAGScheduler" class="headerlink" title="DAGScheduler"></a>DAGScheduler</h3><p>实现将Spark作业分解成一到多个Stage，每个Stage根据RDD的Partition个数决定Task的个数，然后生成相应的Task set放到TaskScheduler中。</p>
+<h3 id="TaskScheduler"><a href="#TaskScheduler" class="headerlink" title="TaskScheduler"></a>TaskScheduler</h3><p>实现Task分配到Executor上执行</p>
+<h3 id="Driver"><a href="#Driver" class="headerlink" title="Driver"></a>Driver</h3><p>一个Spark作业运行时包括一个Driver进程，也是作业的主进程，负责作业的解析、生成Stage并调度Task到Executor上。包括DAGScheduler，TaskScheduler。与执行器节点进行通信，执行器节点作为独立的java进程进行。<br>Driver对应SparkConf SparkContext</p>
+<h2 id="作业执行"><a href="#作业执行" class="headerlink" title="作业执行"></a>作业执行</h2><h3 id="Driver运行在客户端"><a href="#Driver运行在客户端" class="headerlink" title="Driver运行在客户端"></a>Driver运行在客户端</h3><p>客户端启动后直接运行用户程序，启动Driver相关的工作：DAGScheduler和BlockManagerMaster等。 客户端的Driver向Master注册。 Master还会让Worker启动Exeuctor。Worker创建一个ExecutorRunner线程，ExecutorRunner会启动ExecutorBackend进程。 ExecutorBackend启动后会向Driver的SchedulerBackend注册。Driver的DAGScheduler解析作业并生成相应的Stage，每个Stage包含的Task通过TaskScheduler分配给Executor执行。 所有stage都完成后作业结束。</p>
+<h3 id="Driver（作业的master，负责作业的解析、生成stage并调度task到，包含DAGScheduler）运行在Worker"><a href="#Driver（作业的master，负责作业的解析、生成stage并调度task到，包含DAGScheduler）运行在Worker" class="headerlink" title="Driver（作业的master，负责作业的解析、生成stage并调度task到，包含DAGScheduler）运行在Worker"></a>Driver（作业的master，负责作业的解析、生成stage并调度task到，包含DAGScheduler）运行在Worker</h3><p>客户端提交作业给Master Master让一个Worker启动Driver，即SchedulerBackend。Worker创建一个DriverRunner线程，DriverRunner启动SchedulerBackend进程。 另外Master还会让其余Worker启动Exeuctor，即ExecutorBackend。Worker创建一个ExecutorRunner线程，ExecutorRunner会启动ExecutorBackend进程。 ExecutorBackend启动后会向Driver的SchedulerBackend注册。SchedulerBackend进程中包含DAGScheduler，它会根据用户程序，生成执行计划，并调度执行。对于每个stage的task，都会被存放到TaskScheduler中，ExecutorBackend向SchedulerBackend汇报的时候把TaskScheduler中的task调度到ExecutorBackend执行。 所有stage都完成后作业结束。</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>一个应用对应多个job，一个action对应一个job<br>worker不会与master汇报资源，分配时已记录</p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/05/16/Spark-运行内幕/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"yujie"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
