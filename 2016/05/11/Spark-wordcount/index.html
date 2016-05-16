@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Spark-wordcount | lish&#39;s blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="lish">
+    
+    
+
+    <meta name="description" content="Scala开发Sparkjar包下载在spark-1.6.1-bin-hadoop2.6找到spark-assembly-1.6.1-hadoop2.6.0.jar放到Scala的环境配置中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark-wordcount | lish's blog">
+<meta property="og:url" content="http://yoursite.com/2016/05/11/Spark-wordcount/index.html">
+<meta property="og:site_name" content="lish's blog">
+<meta property="og:description" content="Scala开发Sparkjar包下载在spark-1.6.1-bin-hadoop2.6找到spark-assembly-1.6.1-hadoop2.6.0.jar放到Scala的环境配置中">
+<meta property="og:updated_time" content="2016-05-11T11:37:32.397Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark-wordcount | lish's blog">
+<meta name="twitter:description" content="Scala开发Sparkjar包下载在spark-1.6.1-bin-hadoop2.6找到spark-assembly-1.6.1-hadoop2.6.0.jar放到Scala的环境配置中">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">lish&#39;s blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          welcome to here
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/loveCanopy" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Spark-wordcount</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-05-11" class="post-meta__date date">2016-05-11</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Spark/">Spark</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/Scala/">Scala</a>, <a class="tags-link" href="/tags/Spark开发/">Spark开发</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h1 id="Scala开发Spark"><a href="#Scala开发Spark" class="headerlink" title="Scala开发Spark"></a>Scala开发Spark</h1><h2 id="jar包下载"><a href="#jar包下载" class="headerlink" title="jar包下载"></a>jar包下载</h2><p>在spark-1.6.1-bin-hadoop2.6找到spark-assembly-1.6.1-hadoop2.6.0.jar放到Scala的环境配置中<br><a id="more"></a></p>
+<h2 id="wordcount开发"><a href="#wordcount开发" class="headerlink" title="wordcount开发"></a>wordcount开发</h2><h3 id="创建Spark的配置对象SparkConf"><a href="#创建Spark的配置对象SparkConf" class="headerlink" title="创建Spark的配置对象SparkConf"></a>创建Spark的配置对象SparkConf</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> conf=<span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"wordcount"</span>) <span class="comment">//设置程序的名称</span></span><br><span class="line">conf.setMaster(<span class="string">"spark://192.168.2.6:7077"</span>)  <span class="comment">//集群上运行</span></span><br><span class="line">conf.setMaster(<span class="string">"local"</span>) <span class="comment">//本地运行</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建SparkContext对象"><a href="#创建SparkContext对象" class="headerlink" title="创建SparkContext对象"></a>创建SparkContext对象</h3><p>SparkContext是spark程序所有功能的唯一入口   核心作用：初始化spark应用程序运行的核心组件<br>包括DAGScheduler TaskScheduler SchedulerBackend 同时负责Spark程序往master注册程序等<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> sc=<span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br></pre></td></tr></table></figure></p>
+<h3 id="创建RDD-弹性分布式数据集"><a href="#创建RDD-弹性分布式数据集" class="headerlink" title="创建RDD(弹性分布式数据集)"></a>创建RDD(弹性分布式数据集)</h3><p> Spark的RDD是一个不可变的分布式对象集合，每个RDD划分为一系列的partitions，分配给每个partitions的数据属于一个Task<br>1.根据外部数据来源HDFS<br>2.根据Scala集合<br>3.由其他RDD操作<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> lines=sc.textFile(<span class="string">"/user/a.txt"</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="对RDD进行Transformation级别的处理，例如map-filter等高阶操作"><a href="#对RDD进行Transformation级别的处理，例如map-filter等高阶操作" class="headerlink" title="对RDD进行Transformation级别的处理，例如map filter等高阶操作"></a>对RDD进行Transformation级别的处理，例如map filter等高阶操作</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> words=lines.flatMap &#123; lines =&gt; lines.split(<span class="string">" "</span>) &#125;</span><br><span class="line"><span class="keyword">val</span> counts=words.map &#123; word =&gt; (word,<span class="number">1</span>) &#125;.reduceByKey(_+_) </span><br><span class="line">counts.saveAsTextFile(<span class="string">"/user/out"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="打包操作放到服务器上运行"><a href="#打包操作放到服务器上运行" class="headerlink" title="打包操作放到服务器上运行"></a>打包操作放到服务器上运行</h2><p>编写脚本 wordcount.sh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./spark-submit --class com.spark.wordcount --master spark://master:7077   wordcount.jar</span><br><span class="line">                类名                          集群                         jar包的全路径               </span><br><span class="line">chmod +x wordcount.sh</span><br></pre></td></tr></table></figure></p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/05/11/Spark-wordcount/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"yujie"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
