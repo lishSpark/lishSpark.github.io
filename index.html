@@ -229,9 +229,7 @@ classes that you can use:
 
       <div class="excerpt">
         
-          <h1 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h1><p>弹性分布式数据集，分布式元素集合，在Spark中，对数据的所有操作不外乎为创建RDD，转化已有的RDD，调用RDD操作进行求值。</p>
-<h2 id="RDD与Mapreduce"><a href="#RDD与Mapreduce" class="headerlink" title="RDD与Mapreduce"></a>RDD与Mapreduce</h2><p>Hadoop Mapreduce<br>1.不适于大量的迭代<br>2.不适于交互式查询<br>基于数据流方式不能复用曾经的结果或中间计算结果<br>RDD<br>1.自动进行内存，磁盘切换<br>2.高效容错<br>3.Task失败，会进行特定次数的重试<br>4.Stage失败，会自动进行特定次数的重试<br>5.只会计算失败的分片<br>6.checkpoint persist<br>7.数据分配的高度弹性 </p>
-<h2 id="RDD为何高效"><a href="#RDD为何高效" class="headerlink" title="RDD为何高效"></a>RDD为何高效</h2><p>RDD是不可变集合类型，且操作为lazy<br>RDD的写操作为粗粒度，读操作可以是粗粒度也可为细粒度<br>所有的RDD操作都返回迭代器，可以让框架集成<br>
+          <h1 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h1><p>弹性分布式数据集，分布式元素集合，在Spark中，对数据的所有操作不外乎为创建RDD，转化已有的RDD，调用RDD操作进行求值。<br>
         
       </div>
 
