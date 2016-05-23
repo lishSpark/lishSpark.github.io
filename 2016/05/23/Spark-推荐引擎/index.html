@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Spark-推荐引擎 | lish&#39;s blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="lish">
+    
+    
+
+    <meta name="description" content="推荐引擎基于内容的过滤利用物品的内容或是属性信息以及某些相似度定义，来求出与该物品类似的物品，这些属性通常是文本内容(标题，名称，标签，其他元数据)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark-推荐引擎 | lish's blog">
+<meta property="og:url" content="http://yoursite.com/2016/05/23/Spark-推荐引擎/index.html">
+<meta property="og:site_name" content="lish's blog">
+<meta property="og:description" content="推荐引擎基于内容的过滤利用物品的内容或是属性信息以及某些相似度定义，来求出与该物品类似的物品，这些属性通常是文本内容(标题，名称，标签，其他元数据)">
+<meta property="og:updated_time" content="2016-05-23T10:56:51.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark-推荐引擎 | lish's blog">
+<meta name="twitter:description" content="推荐引擎基于内容的过滤利用物品的内容或是属性信息以及某些相似度定义，来求出与该物品类似的物品，这些属性通常是文本内容(标题，名称，标签，其他元数据)">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">lish&#39;s blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          welcome to here
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/loveCanopy" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Spark-推荐引擎</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-05-23" class="post-meta__date date">2016-05-23</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Spark/">Spark</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/Scala/">Scala</a>, <a class="tags-link" href="/tags/Spark开发/">Spark开发</a>, <a class="tags-link" href="/tags/机器学习/">机器学习</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h1 id="推荐引擎"><a href="#推荐引擎" class="headerlink" title="推荐引擎"></a>推荐引擎</h1><h2 id="基于内容的过滤"><a href="#基于内容的过滤" class="headerlink" title="基于内容的过滤"></a>基于内容的过滤</h2><p>利用物品的内容或是属性信息以及某些相似度定义，来求出与该物品类似的物品，这些属性通常是文本内容(标题，名称，标签，其他元数据)<br><a id="more"></a></p>
+<h2 id="协同过滤"><a href="#协同过滤" class="headerlink" title="协同过滤"></a>协同过滤</h2><p>利用大量已有的用户偏好来估计用户对其未接触过的物品的喜好程度。</p>
+<h3 id="矩阵分解"><a href="#矩阵分解" class="headerlink" title="矩阵分解"></a>矩阵分解</h3><h4 id="显式矩阵分解"><a href="#显式矩阵分解" class="headerlink" title="显式矩阵分解"></a>显式矩阵分解</h4><p>当要处理的数据是由用户所提供的自身的偏好数据，包括物品的评级，赞，喜欢等用户对物品的评价<br>找到用户-物品矩阵近似的低阶矩阵，U<em>I=U</em>k和I*k的因子矩阵运算。</p>
+<h4 id="隐式矩阵分解"><a href="#隐式矩阵分解" class="headerlink" title="隐式矩阵分解"></a>隐式矩阵分解</h4><p>用户对物品的偏好不会直接给出，而是隐含在用户和物品的交互中。<br>用户电影评级矩阵=P*C P为用户是否看过某些电影(二元偏好矩阵) C表示观看的次数(信心权重)</p>
+<h4 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h4><p>ALS一种求解矩阵分解问题的最优化方法，是MLlIB唯一实现的求解方法。<br>迭代式的求解一系列最小二乘回归问题。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ALS.train(ratings, rank, iterations,lambda)</span><br><span class="line">rank:对应的ALS模型的因子个数，低阶矩阵中隐含特征个数，一般越多越好，合理取值<span class="number">10</span>到<span class="number">200</span></span><br><span class="line">iterations:运行的迭代次数 <span class="number">10</span>次左右</span><br><span class="line">lambda:控制正则化过程，值越高，正则化越厉害</span><br></pre></td></tr></table></figure></p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><h3 id="显式评级数据提取有效特征"><a href="#显式评级数据提取有效特征" class="headerlink" title="显式评级数据提取有效特征"></a>显式评级数据提取有效特征</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">val conf=<span class="keyword">new</span> SparkConf().setMaster(<span class="string">"local"</span>).setAppName(<span class="string">"CF-user"</span>)</span><br><span class="line">val sc=<span class="keyword">new</span> SparkContext(conf)</span><br><span class="line">val rawData=sc.textFile(<span class="string">"E:\\mllib\\ml-100k\\ml-100k\\u.data"</span>, <span class="number">1</span>)</span><br><span class="line">val rawRatings=rawData.map &#123; _.split(<span class="string">"\t"</span>).take(<span class="number">3</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.recommendation.ALS</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.recommendation.Rating</span><br><span class="line"></span><br><span class="line"><span class="comment">//一个由rating模型构成的RDD</span></span><br><span class="line">val ratings=rawRatings.map &#123; <span class="function"><span class="keyword">case</span> <span class="title">Array</span><span class="params">(user,movie,rating)</span> </span>=&gt; Rating(user.toInt,movie.toInt,rating.toDouble) &#125;</span><br><span class="line"></span><br><span class="line">输出：Rating(<span class="number">196</span>,<span class="number">242</span>,<span class="number">3.0</span>) 用户ID 电影ID 评分的Rating类</span><br></pre></td></tr></table></figure>
+<h3 id="训练推荐模型"><a href="#训练推荐模型" class="headerlink" title="训练推荐模型"></a>训练推荐模型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回一个MaxrixFactorizationModel对象 ，用户因子和物品因子保存在（id,factor）RDD中,分别为model.userFeatures,model.productFeatures </span></span><br><span class="line">val model=ALS.train(ratings, <span class="number">50</span>, <span class="number">10</span>,<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="使用推荐模型"><a href="#使用推荐模型" class="headerlink" title="使用推荐模型"></a>使用推荐模型</h3><h4 id="用户推荐"><a href="#用户推荐" class="headerlink" title="用户推荐"></a>用户推荐</h4><p>指定给用户推荐物品，通过模型求出用户可能喜好程度最高的前K个商品<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//预测789用户对123电影的评分</span></span><br><span class="line">val predictedRating=model.predict(<span class="number">789</span>, <span class="number">123</span>)</span><br></pre></td></tr></table></figure></p>
+<h5 id="生成电影推荐"><a href="#生成电影推荐" class="headerlink" title="生成电影推荐"></a>生成电影推荐</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//给789用户推荐前10个物品</span></span><br><span class="line">val userId=<span class="number">789</span></span><br><span class="line">val K=<span class="number">10</span></span><br><span class="line">val topKrecs=model.recommendProducts(userId, K)</span><br><span class="line">print(topKrecs.mkString(<span class="string">"\t"</span>))</span><br></pre></td></tr></table></figure>
+<h5 id="检验推荐内容"><a href="#检验推荐内容" class="headerlink" title="检验推荐内容"></a>检验推荐内容</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">val movies=sc.textFile(<span class="string">"E:\\mllib\\ml-100k\\ml-100k\\u.item"</span>, <span class="number">1</span>)</span><br><span class="line">val titles=movies.map &#123; line =&gt; line.split(<span class="string">"\\|"</span>).take(<span class="number">2</span>) &#125;.map &#123; array =&gt; (array(<span class="number">0</span>).toInt,array(<span class="number">1</span>) )&#125;.collectAsMap()</span><br><span class="line"></span><br><span class="line">val moviesForUser=ratings.keyBy &#123; _.user &#125;.lookup(<span class="number">789</span>)</span><br><span class="line">println(moviesForUser.size)</span><br><span class="line"></span><br><span class="line">moviesForUser.sortBy(-_.rating).take(<span class="number">10</span>).map &#123; rating =&gt; (titles(rating.product),rating.rating) &#125;.foreach(println)</span><br><span class="line"></span><br><span class="line">println(<span class="string">"======="</span>)</span><br><span class="line"><span class="comment">//对比</span></span><br><span class="line">topKrecs.map &#123; rating =&gt; (titles(rating.product),rating.rating) &#125;.foreach(println)</span><br></pre></td></tr></table></figure>
+<h4 id="物品推荐"><a href="#物品推荐" class="headerlink" title="物品推荐"></a>物品推荐</h4><p>给定一个物品，找到相似度最高的物品与之对应<br>常用方法：1.皮尔森相关系数 2.余弦相似度 3.杰卡德相似系数 </p>
+<h5 id="生成相似电影"><a href="#生成相似电影" class="headerlink" title="生成相似电影"></a>生成相似电影</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.jblas.DoubleMatrix</span><br><span class="line"><span class="comment">//使用余弦相似度来测定相似度</span></span><br><span class="line">val aMatrix=<span class="keyword">new</span> DoubleMatrix(Array(<span class="number">1.0</span>,<span class="number">2.0</span>,<span class="number">3.0</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义函数计算俩个向量之间的余弦相似度</span></span><br><span class="line"><span class="function">def <span class="title">cos</span><span class="params">(vec1:DoubleMatrix,vec2:DoubleMatrix)</span>:Double</span>=&#123;</span><br><span class="line">vec1.dot(vec2)/(vec1.norm2()*vec2.norm2())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">val itemID=<span class="number">567</span></span><br><span class="line">val itemFactor=model.productFeatures.lookup(itemID).head</span><br><span class="line">val itemVector=<span class="keyword">new</span> DoubleMatrix(itemFactor)</span><br><span class="line">cos(itemVector,itemVector)</span><br><span class="line"></span><br><span class="line"><span class="comment">//求各个商品的相似度</span></span><br><span class="line">val sims=model.productFeatures.map&#123;  <span class="keyword">case</span> (id,factor)=&gt;</span><br><span class="line">val factorVector=<span class="keyword">new</span> DoubleMatrix(factor)</span><br><span class="line">val sim=cos(factorVector,itemVector)</span><br><span class="line">(id,sim)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//取出与物品567相似的前10个物品</span></span><br><span class="line">  val K=<span class="number">10</span></span><br><span class="line">    val sortedSims=sims.top(K)(Ordering.by[(Int,Double),Double]&#123;</span><br><span class="line">      <span class="keyword">case</span>(id,similarity)</span><br><span class="line">     =&gt; similarity&#125; )</span><br><span class="line">   </span><br><span class="line">     println(sortedSims.take(<span class="number">10</span>).mkString(<span class="string">"\n"</span>))</span><br></pre></td></tr></table></figure>
+<h5 id="检查相似度"><a href="#检查相似度" class="headerlink" title="检查相似度"></a>检查相似度</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//检验推荐内容</span></span><br><span class="line">val movies=sc.textFile(<span class="string">"E:\\mllib\\ml-100k\\ml-100k\\u.item"</span>, <span class="number">1</span>)</span><br><span class="line">val titles=movies.map &#123; line =&gt; line.split(<span class="string">"\\|"</span>).take(<span class="number">2</span>) &#125;.map &#123; array =&gt; (array(<span class="number">0</span>).toInt,array(<span class="number">1</span>) )&#125;.collectAsMap()</span><br><span class="line">val sortedSim=sims.top(K+<span class="number">1</span>)(Ordering.by[(Int,Double),Double] &#123; <span class="keyword">case</span> (id,similarity) =&gt; similarity &#125;)</span><br><span class="line">sortedSim.slice(<span class="number">1</span>, <span class="number">11</span>).map&#123;<span class="keyword">case</span> (id,sim)=&gt;(titles(id),sim)&#125;.mkString(<span class="string">"\n"</span>).foreach &#123; print &#125;</span><br></pre></td></tr></table></figure>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/05/23/Spark-推荐引擎/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"yujie"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
