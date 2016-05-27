@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Spark-决策树 | lish&#39;s blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="lish">
+    
+    
+
+    <meta name="description" content="回归回归是预测一个数值型数量，比如大小，收入和温度，而分类是指预测标号(label)或类别(category)，比如邮件是否为垃圾邮件分类和回归都需要从一组输入和输出中学习预测规则，属于监督学习
+特征类别型特征和数值型特征，类别型特征只能在几个离散值中取一个回归问题的目标为数值型特征，分类问题的特征是类别型特征12.5，12，0.1，晴朗，0 为特征 所有特征的集合为训练集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark-决策树 | lish's blog">
+<meta property="og:url" content="http://yoursite.com/2016/05/25/Spark-决策树/index.html">
+<meta property="og:site_name" content="lish's blog">
+<meta property="og:description" content="回归回归是预测一个数值型数量，比如大小，收入和温度，而分类是指预测标号(label)或类别(category)，比如邮件是否为垃圾邮件分类和回归都需要从一组输入和输出中学习预测规则，属于监督学习
+特征类别型特征和数值型特征，类别型特征只能在几个离散值中取一个回归问题的目标为数值型特征，分类问题的特征是类别型特征12.5，12，0.1，晴朗，0 为特征 所有特征的集合为训练集">
+<meta property="og:image" content="http://yoursite.com/images/决策树.png">
+<meta property="og:updated_time" content="2016-05-27T12:11:37.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark-决策树 | lish's blog">
+<meta name="twitter:description" content="回归回归是预测一个数值型数量，比如大小，收入和温度，而分类是指预测标号(label)或类别(category)，比如邮件是否为垃圾邮件分类和回归都需要从一组输入和输出中学习预测规则，属于监督学习
+特征类别型特征和数值型特征，类别型特征只能在几个离散值中取一个回归问题的目标为数值型特征，分类问题的特征是类别型特征12.5，12，0.1，晴朗，0 为特征 所有特征的集合为训练集">
+<meta name="twitter:image" content="http://yoursite.com/images/决策树.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">lish&#39;s blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          welcome to here
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/loveCanopy" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Spark-决策树</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-05-25" class="post-meta__date date">2016-05-25</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Spark/">Spark</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/Scala/">Scala</a>, <a class="tags-link" href="/tags/Spark开发/">Spark开发</a>, <a class="tags-link" href="/tags/机器学习/">机器学习</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h1 id="回归"><a href="#回归" class="headerlink" title="回归"></a>回归</h1><p>回归是预测一个数值型数量，比如大小，收入和温度，而分类是指预测标号(label)或类别(category)，比如邮件是否为垃圾邮件<br>分类和回归都需要从一组输入和输出中学习预测规则，属于监督学习</p>
+<h2 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h2><p>类别型特征和数值型特征，类别型特征只能在几个离散值中取一个<br>回归问题的目标为数值型特征，分类问题的特征是类别型特征<br>12.5，12，0.1，晴朗，0 为特征 所有特征的集合为训练集<br><a id="more"></a></p>
+<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><p><img src="/images/决策树.png" alt="决策树"></p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><h3 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h3><p>covtypedata <a href="http://t.cn/R2wmIsI" title="link" target="_blank" rel="external">链接</a><br>分类变量如何编码，下面是编码的方式：<br>一个合适的编码方式是：one-hot 或者 1 of n 编码 一个分类变量：编码为 n（分类特征个数）个变量<br>另一种编码方式：就是给每个值一个固定的数字，例如： 1， 2， 3， …， n<br>当算法中把编码当作数字的时候只能使用第一种编码，第二种编码会得出滑稽的结果。具体原因是没有大小的东西被强制成有大小之分。<br>Covtype 数据集中有很多类型的特征，不过很幸运，它已经帮我们转换成 one-hot 形势，具体来说：<br>11到14列，其实表示的是 Wilderness_Area，Wilderness_Area 本身有 4 个类别<br>15到54列，其实表示的是 Soil_Type，Soil_Type 本身有 40个属性值<br>55列是表示目标值，当然它不需要表示成为 one-hot形式。<br>2952,107,11,42,7,5845,239,226,116,3509,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,2 </p>
+<h3 id="使用数据"><a href="#使用数据" class="headerlink" title="使用数据"></a>使用数据</h3><p>Spark MLlib将特征向量抽象为LabeledPoint 包括一个Vector和Label(目标值，从0开始)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">val conf=<span class="keyword">new</span> SparkConf().setMaster(<span class="string">"local"</span>).setAppName(<span class="string">"Decision"</span>)</span><br><span class="line">val sc=<span class="keyword">new</span> SparkContext(conf)</span><br><span class="line">val rawData=sc.textFile(<span class="string">"E:\\mllib\\CovType\\covtype.data\\covtype.data"</span>, <span class="number">1</span>)</span><br><span class="line">val data=rawData.map &#123; line =&gt;     </span><br><span class="line">val values=line.split(<span class="string">","</span>).map &#123; _.toDouble &#125; </span><br><span class="line">val featureVector=Vectors.dense(values.init)</span><br><span class="line">val label=values.last-<span class="number">1</span></span><br><span class="line">LabeledPoint(label,featureVector) <span class="comment">//特征向量</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">前5条记录  第一列为目标值-1</span><br><span class="line">(4.0,[2596.0,51.0,3.0,258.0,0.0,510.0,221.0,232.0,148.0,6279.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])</span><br><span class="line">(4.0,[2590.0,56.0,2.0,212.0,-6.0,390.0,220.0,235.0,151.0,6225.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])</span><br><span class="line">(1.0,[2804.0,139.0,9.0,268.0,65.0,3180.0,234.0,238.0,135.0,6121.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])</span><br><span class="line">(1.0,[2785.0,155.0,18.0,242.0,118.0,3090.0,238.0,238.0,122.0,6211.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])</span><br><span class="line">(4.0,[2595.0,45.0,2.0,153.0,-1.0,391.0,220.0,234.0,150.0,6172.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])</span><br><span class="line">```   </span><br><span class="line">### 设定AUC指标</span><br><span class="line">数据分为训练集，交叉检验集，测试集</span><br><span class="line">```java</span><br><span class="line">//将数据分为完整的三部分 训练集80%，交叉检验集10%，测试集10%</span><br><span class="line">val Array(trainData,cvData,testData)=data.randomSplit(Array(0.8,0.1,0.1))</span><br><span class="line">//缓存数据</span><br><span class="line">trainData.cache()</span><br><span class="line">cvData.cache()</span><br><span class="line">testData.cache()</span><br></pre></td></tr></table></figure>
+<h3 id="构造模型"><a href="#构造模型" class="headerlink" title="构造模型"></a>构造模型</h3><p>trainClassifier(数据,目标的取值个数，类别型特征信息，解释参数型，深度，桶数)<br>类别型特征信息Map[Int,Int] 元素的键为特征在输入Vector中的下标，值为类别型特征的不同取值的个数<br>例：map(10 -&gt;4 , 11-&gt;40) 第10个特征有4个不同取值，11个特征有40个不同取值<br>深度是决策树的层数，桶为决策规则，桶数越多，决策规则越优。解释参数型为gini,Entropy<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在训练集上构造分类树模型</span></span><br><span class="line">val model=DecisionTree.trainClassifier(trainData, <span class="number">7</span>, Map[Int,Int](), <span class="string">"gini"</span>, <span class="number">4</span>, <span class="number">100</span>)</span><br><span class="line"><span class="comment">//得到混淆矩阵和目标类型的取值有关</span></span><br><span class="line"><span class="function">def <span class="title">getMetrics</span><span class="params">(model:DecisionTreeModel,data:RDD[LabeledPoint])</span>:MulticlassMetrics</span>=&#123;</span><br><span class="line">  val predictionAndLabels=data.map &#123; example =&gt; (model.predict(example.features),example.label) &#125;</span><br><span class="line">  <span class="keyword">new</span> MulticlassMetrics(predictionAndLabels)</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//用CVdata预测</span></span><br><span class="line">val metrics=getMetrics(model,cvData)  <span class="number">7</span>*<span class="number">7</span>矩阵</span><br></pre></td></tr></table></figure></p>
+<h3 id="准确率"><a href="#准确率" class="headerlink" title="准确率"></a>准确率</h3><p>精确度,召回率(被分类器标记为“正”的所有样本与所有样本就是“正”的样本的比率)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">0</span> until <span class="number">7</span>).map(cat =&gt;(metrics.precision(cat),metrics.recall(cat))).foreach(println)</span><br></pre></td></tr></table></figure></p>
+<h4 id="多元的总体准确率"><a href="#多元的总体准确率" class="headerlink" title="多元的总体准确率"></a>多元的总体准确率</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对准确度评估</span></span><br><span class="line"><span class="function">def <span class="title">classPro</span><span class="params">(data:RDD[LabeledPoint])</span>:Array[Double]</span>=&#123;</span><br><span class="line"></span><br><span class="line">val countByKey=data.map(_.label).countByValue() <span class="comment">//(类别，数量)</span></span><br><span class="line">val counts=countByKey.toArray.sortBy(_._1).map(_._2)</span><br><span class="line"></span><br><span class="line">counts.map &#123; _.toDouble/counts.sum &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">val TrainPro=classPro(trainData)</span><br><span class="line">val CvPro=classPro(cvData)</span><br><span class="line">val numPreci=TrainPro.zip(CvPro).map&#123;<span class="keyword">case</span>(train,cv)=&gt;train*cv&#125;.sum</span><br></pre></td></tr></table></figure>
+<p>参数选择<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">evaluate</span><span class="params">(trainData: RDD[LabeledPoint], cvData: RDD[LabeledPoint])</span>: Unit </span>= &#123;</span><br><span class="line">   val evaluations =</span><br><span class="line">     <span class="keyword">for</span> (impurity &lt;- Array(<span class="string">"gini"</span>, <span class="string">"entropy"</span>);</span><br><span class="line">          depth &lt;- Array(<span class="number">1</span>, <span class="number">20</span>);</span><br><span class="line">          bins &lt;- Array(<span class="number">10</span>, <span class="number">300</span>))</span><br><span class="line">       yield &#123;</span><br><span class="line">         val model = DecisionTree.trainClassifier(</span><br><span class="line">           trainData, <span class="number">7</span>, Map[Int,Int](), impurity, depth, bins)</span><br><span class="line">         val predictionsAndLabels = cvData.map(example =&gt;</span><br><span class="line">           (model.predict(example.features), example.label)</span><br><span class="line">         )</span><br><span class="line">         val accuracy =</span><br><span class="line">           <span class="keyword">new</span> MulticlassMetrics(predictionsAndLabels).precision</span><br><span class="line">         ((impurity, depth, bins), accuracy)</span><br><span class="line">       &#125;</span><br><span class="line">   evaluations.sortBy(_._2).reverse.foreach(println)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h2><p>由多个决策树独立构造而成<br>参数：数据集，目标的取值个数，类别型特征信息，决策树个数，评估特征策略，解释参数型，深度，桶数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val forest=RandomForest.trainClassifier(trainData, <span class="number">7</span>, Map(<span class="number">10</span>-&gt;<span class="number">4</span>,<span class="number">11</span>-&gt;<span class="number">40</span>), <span class="number">20</span>, <span class="string">"auto"</span>, <span class="string">"entropy"</span>, <span class="number">30</span>, <span class="number">300</span>)</span><br></pre></td></tr></table></figure></p>
+<p>预测<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//预测</span></span><br><span class="line">val input=<span class="string">"2709,125,28,67,23,3224,253,207,61,6094,0,29"</span></span><br><span class="line">val vector=Vectors.dense(input.split(<span class="string">','</span>).map( _.toDouble))</span><br><span class="line">val forst_pre=forest.predict(vector)</span><br><span class="line">val model_pre=model.predict(vector)</span><br><span class="line">println(forst_pre+<span class="string">" "</span>+model_pre)</span><br></pre></td></tr></table></figure></p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/05/25/Spark-决策树/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"yujie"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
