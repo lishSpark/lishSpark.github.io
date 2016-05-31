@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Spark-K均值聚类 | lish&#39;s blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="lish">
+    
+    
+
+    <meta name="description" content="聚类最有名的非监督学习的算法，试图找到数据中的自然数组，一群互相相似而与其他点不同的数据点往往代码某种意义的一个簇群，聚类算法就是把这些相似的数据划分到同一簇群中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark-K均值聚类 | lish's blog">
+<meta property="og:url" content="http://yoursite.com/2016/05/31/Spark-K均值聚类/index.html">
+<meta property="og:site_name" content="lish's blog">
+<meta property="og:description" content="聚类最有名的非监督学习的算法，试图找到数据中的自然数组，一群互相相似而与其他点不同的数据点往往代码某种意义的一个簇群，聚类算法就是把这些相似的数据划分到同一簇群中。">
+<meta property="og:updated_time" content="2016-05-31T10:48:57.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark-K均值聚类 | lish's blog">
+<meta name="twitter:description" content="聚类最有名的非监督学习的算法，试图找到数据中的自然数组，一群互相相似而与其他点不同的数据点往往代码某种意义的一个簇群，聚类算法就是把这些相似的数据划分到同一簇群中。">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">lish&#39;s blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          welcome to here
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/loveCanopy" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Spark-K均值聚类</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-05-31" class="post-meta__date date">2016-05-31</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Spark/">Spark</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/Scala/">Scala</a>, <a class="tags-link" href="/tags/Spark开发/">Spark开发</a>, <a class="tags-link" href="/tags/机器学习/">机器学习</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><p>最有名的非监督学习的算法，试图找到数据中的自然数组，一群互相相似而与其他点不同的数据点往往代码某种意义的一个簇群，聚类算法就是把这些相似的数据划分到同一簇群中。<br><a id="more"></a></p>
+<h2 id="K均值聚类该簇"><a href="#K均值聚类该簇" class="headerlink" title="K均值聚类该簇"></a>K均值聚类该簇</h2><p>试图在数据集中找出K个簇群，关键点位如何选择合适的K值，K均值算法中数据点相互距离一般采用欧式距离。计算欧式要求数据点特征为数值型，簇值的中心为质心，是簇群中所有的点的算术平均值。算法开始时选择一些数据点为簇群的质心，然后把每个数据点分配给最近的质心，接着对每个簇计算该簇的所有数据点的平均值，并见那个其作为该簇的新质心，不断重复该过程。</p>
+<h2 id="实例测试"><a href="#实例测试" class="headerlink" title="实例测试"></a>实例测试</h2><h3 id="准备数据集"><a href="#准备数据集" class="headerlink" title="准备数据集"></a>准备数据集</h3><p>KDD CUP 1999数据集  <a href="http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html" title="link" target="_blank" rel="external">链接</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>,tcp,http,SF,<span class="number">181</span>,<span class="number">5450</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">8</span>,<span class="number">8</span>,<span class="number">0.00</span>,<span class="number">0.00</span>,<span class="number">0.00</span>,<span class="number">0.00</span>,<span class="number">1.00</span>,<span class="number">0.00</span>,<span class="number">0.00</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">1.00</span>,<span class="number">0.00</span>,<span class="number">0.11</span>,<span class="number">0.00</span>,<span class="number">0.00</span>,<span class="number">0.00</span>,<span class="number">0.00</span>,<span class="number">0.00</span>,normal.</span><br><span class="line">包含<span class="number">38</span>个特征，最后为目标值</span><br></pre></td></tr></table></figure></p>
+<h3 id="统计样本个数"><a href="#统计样本个数" class="headerlink" title="统计样本个数"></a>统计样本个数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">val conf=<span class="keyword">new</span> SparkConf().setMaster(<span class="string">"local"</span>).setAppName(<span class="string">"K-MEANS"</span>)</span><br><span class="line">val sc=<span class="keyword">new</span> SparkContext(conf)</span><br><span class="line">val rawData=sc.textFile(<span class="string">"E:\\mllib\\kddcup.data\\kddcup.data_10_percent_corrected"</span>)</span><br><span class="line">val data=rawData.map &#123;_.split(<span class="string">","</span>).last&#125;.countByValue().toSeq.sortBy(_._2).reverse <span class="comment">//默认为降序排序  reverse为升序</span></span><br><span class="line">输出</span><br><span class="line">(smurf.,<span class="number">2807886</span>)</span><br><span class="line">(neptune.,<span class="number">1072017</span>)</span><br><span class="line">(normal.,<span class="number">972781</span>)</span><br><span class="line">(satan.,<span class="number">15892</span>)</span><br><span class="line">(ipsweep.,<span class="number">12481</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="处理数据"><a href="#处理数据" class="headerlink" title="处理数据"></a>处理数据</h3><p>K均值聚类算法要求特征为数据型，我们先简单的忽略非数值列。<br>1.删除下标从1开始的三个类别型列和最后标号列<br>2.保留其他值并将其转换为一个数值型数组<br>3.把数组和标号组织为一个元组<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">val labelsAndData=rawData.map&#123;</span><br><span class="line">   line =&gt;</span><br><span class="line">     val buffer=line.split(<span class="string">","</span>).toBuffer</span><br><span class="line">     buffer.remove(<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">     val label=buffer.remove(buffer.length-<span class="number">1</span>)</span><br><span class="line">     val vector=Vectors.dense(buffer.map ( _.toDouble ).toArray)</span><br><span class="line">     (label,vector)</span><br><span class="line">   </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>缓存数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val new_data=labelsAndData.values.cache()</span><br></pre></td></tr></table></figure></p>
+<h3 id="Spark聚类操作"><a href="#Spark聚类操作" class="headerlink" title="Spark聚类操作"></a>Spark聚类操作</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">val kmeans=<span class="keyword">new</span> KMeans()</span><br><span class="line">val model=kmeans.run(new_data)</span><br><span class="line">model.clusterCenters.foreach(println)</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">[<span class="number">47.979395571029514</span>,<span class="number">1622.078830816566</span>,<span class="number">868.5341828266062</span>,<span class="number">4.453261001578883E-5</span>,<span class="number">0.006432937937735314</span>,<span class="number">1.4169466823205539E-5</span>,<span class="number">0.03451682118132869</span>,<span class="number">1.5181571596291647E-4</span>,<span class="number">0.14824703453301485</span>,<span class="number">0.01021213716043885</span>,<span class="number">1.1133152503947209E-4</span>,<span class="number">3.6435771831099954E-5</span>,<span class="number">0.011351767134933808</span>,<span class="number">0.0010829521072021374</span>,<span class="number">1.0930731549329986E-4</span>,<span class="number">0.0010080563539937655</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0013865835391279706</span>,<span class="number">332.2862475203433</span>,<span class="number">292.9071434354884</span>,<span class="number">0.1766854175944295</span>,<span class="number">0.1766078094004292</span>,<span class="number">0.05743309987449898</span>,<span class="number">0.05771839196793656</span>,<span class="number">0.7915488441762849</span>,<span class="number">0.020981640419416685</span>,<span class="number">0.028996862475203982</span>,<span class="number">232.4707319541719</span>,<span class="number">188.6660459090725</span>,<span class="number">0.7537812031901855</span>,<span class="number">0.030905611108874582</span>,<span class="number">0.6019355289259479</span>,<span class="number">0.0066835148374550625</span>,<span class="number">0.17675395732965873</span>,<span class="number">0.17644162179668482</span>,<span class="number">0.05811762681672762</span>,<span class="number">0.05741111695882669</span>]</span><br><span class="line">[<span class="number">2.0</span>,<span class="number">6.9337564E8</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">1.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">57.0</span>,<span class="number">3.0</span>,<span class="number">0.79</span>,<span class="number">0.67</span>,<span class="number">0.21</span>,<span class="number">0.33</span>,<span class="number">0.05</span>,<span class="number">0.39</span>,<span class="number">0.0</span>,<span class="number">255.0</span>,<span class="number">3.0</span>,<span class="number">0.01</span>,<span class="number">0.09</span>,<span class="number">0.22</span>,<span class="number">0.0</span>,<span class="number">0.18</span>,<span class="number">0.67</span>,<span class="number">0.05</span>,<span class="number">0.33</span>]</span><br></pre></td></tr></table></figure>
+<p>程序输出俩个向量，代表K均值把数据聚类成2个簇。<br>K均值算法中，簇群其实就是一个点，即组成该簇的所有点的中心，数据点其实就是由所有数值型特征组成的特征向量。</p>
+<h3 id="直观化输出"><a href="#直观化输出" class="headerlink" title="直观化输出"></a>直观化输出</h3><p>对每个簇中每个标号出现的次数进行计数，为每个数据点分配一个簇，然后对簇-类别进行计数，然后可读的方式输出。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> val clusterlabelCount=labelsAndData.map&#123;</span><br><span class="line">     <span class="keyword">case</span>(label,datum)=&gt;</span><br><span class="line">       val cluster=model.predict(datum)</span><br><span class="line">       (cluster,label)</span><br><span class="line">   &#125;.countByValue</span><br><span class="line">   </span><br><span class="line">   clusterlabelCount.toSeq.sorted.foreach&#123;</span><br><span class="line">     </span><br><span class="line">     <span class="keyword">case</span>((cluster,label),count)=&gt;</span><br><span class="line">       println(cluster+<span class="string">" "</span>+label+<span class="string">" "</span>+count)</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line"><span class="number">0</span> back. <span class="number">2203</span></span><br><span class="line"><span class="number">0</span> buffer_overflow. <span class="number">30</span></span><br><span class="line"><span class="number">0</span> ftp_write. <span class="number">8</span></span><br><span class="line"><span class="number">0</span> guess_passwd. <span class="number">53</span></span><br><span class="line"><span class="number">0</span> imap. <span class="number">12</span></span><br><span class="line"><span class="number">0</span> ipsweep. <span class="number">1247</span></span><br><span class="line"><span class="number">0</span> land. <span class="number">21</span></span><br><span class="line"><span class="number">0</span> loadmodule. <span class="number">9</span></span><br><span class="line"><span class="number">0</span> multihop. <span class="number">7</span></span><br><span class="line"><span class="number">0</span> neptune. <span class="number">107201</span></span><br><span class="line"><span class="number">0</span> nmap. <span class="number">231</span></span><br><span class="line"><span class="number">0</span> normal. <span class="number">97278</span></span><br><span class="line"><span class="number">0</span> perl. <span class="number">3</span></span><br><span class="line"><span class="number">0</span> phf. <span class="number">4</span></span><br><span class="line"><span class="number">0</span> pod. <span class="number">264</span></span><br><span class="line"><span class="number">0</span> portsweep. <span class="number">1039</span></span><br><span class="line"><span class="number">0</span> rootkit. <span class="number">10</span></span><br><span class="line"><span class="number">0</span> satan. <span class="number">1589</span></span><br><span class="line"><span class="number">0</span> smurf. <span class="number">280790</span></span><br><span class="line"><span class="number">0</span> spy. <span class="number">2</span></span><br><span class="line"><span class="number">0</span> teardrop. <span class="number">979</span></span><br><span class="line"><span class="number">0</span> warezclient. <span class="number">1020</span></span><br><span class="line"><span class="number">0</span> warezmaster. <span class="number">20</span></span><br><span class="line"><span class="number">1</span> portsweep. <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="选择合适的K值"><a href="#选择合适的K值" class="headerlink" title="选择合适的K值"></a>选择合适的K值</h3><p>定义欧式距离和数据点到最近簇质心的距离的函数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">disttoCentroid</span><span class="params">(datum:Vector ,model :KMeansModel)</span></span>=&#123;</span><br><span class="line">  </span><br><span class="line">  val cluster=model.predict(datum)</span><br><span class="line">  val centroid=model.clusterCenters(cluster) <span class="comment">//最近簇的质心</span></span><br><span class="line">  distance(centroid,datum)</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="function">def <span class="title">clusteringScore</span><span class="params">(data:RDD[Vector],k:Int)</span></span>=&#123;</span><br><span class="line"></span><br><span class="line">val kmeans=<span class="keyword">new</span> KMeans()</span><br><span class="line">kmeans.setK(k)</span><br><span class="line">val model=kmeans.run(data)</span><br><span class="line">data.map(datum=&gt;disttoCentroid(datum,model)).mean()</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">对K进行评价</span><br><span class="line"> (<span class="number">5</span> to <span class="number">40</span> by <span class="number">5</span>).map(k=&gt;(k,clusteringScore(new_data,k))).foreach(println)</span><br><span class="line">输出：</span><br><span class="line">(<span class="number">5</span>,<span class="number">1779.3473960726278</span>)</span><br><span class="line">(<span class="number">10</span>,<span class="number">1045.7698346483824</span>)</span><br><span class="line">(<span class="number">15</span>,<span class="number">888.4541349979995</span>)</span><br><span class="line">(<span class="number">20</span>,<span class="number">587.4098823876957</span>)</span><br><span class="line">(<span class="number">25</span>,<span class="number">691.0673141997573</span>)</span><br><span class="line">(<span class="number">30</span>,<span class="number">670.5355237087188</span>)</span><br><span class="line">(<span class="number">35</span>,<span class="number">294.8166774400612</span>)</span><br><span class="line">(<span class="number">40</span>,<span class="number">278.0287120232854</span>)</span><br></pre></td></tr></table></figure></p>
+<p>kmeans.setRuns()  //设置给定K值得运行次数<br>kmeans.setEpsilon() //控制聚类过程中簇质心移动的距离的最小值</p>
+<h3 id="特征的标准化"><a href="#特征的标准化" class="headerlink" title="特征的标准化"></a>特征的标准化</h3><p>每个特征值-平均值/标准差<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">val dataAsArray=new_data.map &#123; _.toArray &#125;</span><br><span class="line">   val numcols=dataAsArray.first().length <span class="comment">//数组长度</span></span><br><span class="line">   val n=dataAsArray.count() <span class="comment">//总记录数 </span></span><br><span class="line">   val sums=dataAsArray.reduce((a,b)=&gt;a.zip(b).map(t=&gt;t._1+t._2)) <span class="comment">//向量之和</span></span><br><span class="line">   val means=sums.map &#123; _/n &#125; <span class="comment">//各个维度的平均值</span></span><br><span class="line">   </span><br><span class="line">   val sumSquares=dataAsArray.fold(<span class="keyword">new</span> Array[Double](numcols))((a,b)=&gt;a.zip(b).map(t=&gt;t._1+t._2*t._2)) <span class="comment">//平方和返回一个数组</span></span><br><span class="line">   </span><br><span class="line">   val stdevs=sumSquares.zip(sums).map&#123;                 <span class="comment">//标准差</span></span><br><span class="line">     <span class="keyword">case</span>(sumSq,sum)=&gt;math.sqrt(n*sumSq-sum*sum)/n</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">//标准化函数</span></span><br><span class="line">   <span class="function">def <span class="title">normalize</span><span class="params">(data:Vector)</span></span>=&#123;</span><br><span class="line">     val normalizedArray=(data.toArray,means,stdevs).zipped.map(</span><br><span class="line">     (value,mean,stdev)=&gt;</span><br><span class="line">       <span class="keyword">if</span>(stdev&lt;=<span class="number">0</span>) (value-mean) <span class="keyword">else</span> (value-mean)/stdev</span><br><span class="line">     </span><br><span class="line">     )</span><br><span class="line">     </span><br><span class="line">     Vectors.dense(normalizedArray)</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   val normalizedData=new_data.map (normalize).cache() <span class="comment">//数据标准化</span></span><br><span class="line">   </span><br><span class="line">   (<span class="number">60</span> to <span class="number">120</span> by <span class="number">10</span>).par.map(k=&gt;(k,clusteringScore(normalizedData,k))).toList.foreach(println)</span><br></pre></td></tr></table></figure></p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/05/31/Spark-K均值聚类/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"yujie"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
