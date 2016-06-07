@@ -22,13 +22,14 @@
 <meta property="og:url" content="http://yoursite.com/2016/05/16/Spark-运行内幕/index.html">
 <meta property="og:site_name" content="lish's blog">
 <meta property="og:description" content="运行内幕1.Driver创建DAGScheduler,TaskScheduler,在实例化过程中，注册当前程序给master,master接受注册，分配资源；一般情况下，当通过Action触发job,SparkContext会通过DAGScheduler来把job中的RDD构成的DAG划分为不同的Stage，每个Stage内部是一系列业务逻辑完全相同，处理数据不同的Tasks，构成TaskSet,">
+<meta property="og:image" content="http://yoursite.com/images/Spark程序.png">
 <meta property="og:image" content="http://yoursite.com/images/spark整体架构.png">
 <meta property="og:image" content="http://yoursite.com/images/Spark程序.png">
-<meta property="og:updated_time" content="2016-06-07T07:36:51.256Z">
+<meta property="og:updated_time" content="2016-06-07T12:49:49.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark-运行内幕 | lish's blog">
 <meta name="twitter:description" content="运行内幕1.Driver创建DAGScheduler,TaskScheduler,在实例化过程中，注册当前程序给master,master接受注册，分配资源；一般情况下，当通过Action触发job,SparkContext会通过DAGScheduler来把job中的RDD构成的DAG划分为不同的Stage，每个Stage内部是一系列业务逻辑完全相同，处理数据不同的Tasks，构成TaskSet,">
-<meta name="twitter:image" content="http://yoursite.com/images/spark整体架构.png">
+<meta name="twitter:image" content="http://yoursite.com/images/Spark程序.png">
     
     
     
@@ -227,7 +228,7 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <h1 id="运行内幕"><a href="#运行内幕" class="headerlink" title="运行内幕"></a>运行内幕</h1><p>1.Driver创建DAGScheduler,TaskScheduler,在实例化过程中，注册当前程序给master,master接受注册，分配资源；一般情况下，当通过Action触发job,SparkContext会通过DAGScheduler来把job中的RDD构成的DAG划分为不同的Stage，每个Stage内部是一系列业务逻辑完全相同，处理数据不同的Tasks，构成TaskSet,而TaskScheduler和SchedulerBackend负责具体Task运行。<br><a id="more"></a><br>2.Master：接受用户提交的程序并发送指令给Worker，为当前程序分配计算资源，每个worker所在的节点，默认为当前程序分配一个executor,executor通过线程池并发执行，Master通知worker按要求启动executor;通过Proxy为executorRunner进程启动executorBackend,通过TaskRunner来封装Task,然后从线程池获取一条，执行Task;最后一个Stage中Task为ResultTask产生Job结果<br><img src="/images/spark整体架构.png" alt="spark整体架构"></p>
+    <h1 id="运行内幕"><a href="#运行内幕" class="headerlink" title="运行内幕"></a>运行内幕</h1><p>1.Driver创建DAGScheduler,TaskScheduler,在实例化过程中，注册当前程序给master,master接受注册，分配资源；一般情况下，当通过Action触发job,SparkContext会通过DAGScheduler来把job中的RDD构成的DAG划分为不同的Stage，每个Stage内部是一系列业务逻辑完全相同，处理数据不同的Tasks，构成TaskSet,而TaskScheduler和SchedulerBackend负责具体Task运行。<br><img src="/images/Spark程序.png" alt="spark运行架构"><br><a id="more"></a><br>2.Master：接受用户提交的程序并发送指令给Worker，为当前程序分配计算资源，每个worker所在的节点，默认为当前程序分配一个executor,executor通过线程池并发执行，Master通知worker按要求启动executor;通过Proxy为executorRunner进程启动executorBackend,通过TaskRunner来封装Task,然后从线程池获取一条，执行Task;最后一个Stage中Task为ResultTask产生Job结果<br><img src="/images/spark整体架构.png" alt="spark整体架构"></p>
 <h2 id="相关名词"><a href="#相关名词" class="headerlink" title="相关名词"></a>相关名词</h2><h3 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h3><p>客户端进程，负责提交作业到Master</p>
 <h3 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h3><p>真正执行作业的地方，一个集群一般包含多个Executor，每个Executor接收Driver的命令Launch Task，一个Executor可以执行一到多个Task。</p>
 <h3 id="Stage"><a href="#Stage" class="headerlink" title="Stage"></a>Stage</h3><p>一个Spark作业一般包含一到多个Stage</p>
