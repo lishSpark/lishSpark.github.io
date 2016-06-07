@@ -16,16 +16,16 @@
     
     
 
-    <meta name="description" content="RDD弹性分布式数据集，分布式元素集合，在Spark中，对数据的所有操作不外乎为创建RDD，转化已有的RDD，调用RDD操作进行求值。">
+    <meta name="description" content="RDDRDD（Resilient Distributed Datasets）弹性分布式数据集，是在集群应用中分享数据的一种高效，通用，容错的抽象，是Spark提供的最重要的抽象的概念，它是一种有容错机制的特殊集合，可以分布在集群的节点上，以函数式编操作集合的方式，进行各种并行操作。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark-RDD | lish's blog">
 <meta property="og:url" content="http://yoursite.com/2016/05/16/Spark-RDD/index.html">
 <meta property="og:site_name" content="lish's blog">
-<meta property="og:description" content="RDD弹性分布式数据集，分布式元素集合，在Spark中，对数据的所有操作不外乎为创建RDD，转化已有的RDD，调用RDD操作进行求值。">
-<meta property="og:updated_time" content="2016-05-17T08:09:09.701Z">
+<meta property="og:description" content="RDDRDD（Resilient Distributed Datasets）弹性分布式数据集，是在集群应用中分享数据的一种高效，通用，容错的抽象，是Spark提供的最重要的抽象的概念，它是一种有容错机制的特殊集合，可以分布在集群的节点上，以函数式编操作集合的方式，进行各种并行操作。">
+<meta property="og:updated_time" content="2016-06-07T12:32:20.035Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark-RDD | lish's blog">
-<meta name="twitter:description" content="RDD弹性分布式数据集，分布式元素集合，在Spark中，对数据的所有操作不外乎为创建RDD，转化已有的RDD，调用RDD操作进行求值。">
+<meta name="twitter:description" content="RDDRDD（Resilient Distributed Datasets）弹性分布式数据集，是在集群应用中分享数据的一种高效，通用，容错的抽象，是Spark提供的最重要的抽象的概念，它是一种有容错机制的特殊集合，可以分布在集群的节点上，以函数式编操作集合的方式，进行各种并行操作。">
     
     
     
@@ -224,7 +224,9 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <h1 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h1><p>弹性分布式数据集，分布式元素集合，在Spark中，对数据的所有操作不外乎为创建RDD，转化已有的RDD，调用RDD操作进行求值。<br><a id="more"></a></p>
+    <h1 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h1><p>RDD（Resilient Distributed Datasets）弹性分布式数据集，是在集群应用中分享数据的一种高效，通用，容错的抽象，是Spark提供的最重要的抽象的概念，它是一种有容错机制的特殊集合，可以分布在集群的节点上，以函数式编操作集合的方式，进行各种并行操作。<br><a id="more"></a><br>RDD是只读的，不可变的数据集。RDD也是容错的，假如其中一个RDD坏掉，RDD中有记录之前的依赖关系，依赖关系中记录算子和分区，可以重新生成。RDD实现分布式数据集容错方法有两种：数据检查点和记录更新。同时RDD是高效的，不需要物化。它也是分区记录的集合，可以缓存的。<br>每个RDD都包含有一组RDD分区（partition），数据集的原子组成部分，还有对父RDD的一组依赖，这些依赖描述了RDD的Lineage；以及一个函数，说明在父RDD上执行何种计算；还包含元数据，描述分区模式和数据存放的位置。</p>
+<h2 id="RDD依赖"><a href="#RDD依赖" class="headerlink" title="RDD依赖"></a>RDD依赖</h2><p>RDD之间的依赖关系分为宽依赖和窄依赖两类。对于窄依赖，子RDD的每个分区依赖于常数个父分区，它与数据规模无关。输入输出是一对一的算子，但是其中一种方式的结果RDD的分区结构不变，主要是map，flatMap。但是如union，coalesce结果RDD的分区结构会发生变化。对于宽依赖，子RDD的每个分区都依赖于所有的父RDD分区。<br>对于两种依赖关系，窄依赖允许在一个集群节点上以流水线的方式（pipeline）计算所有父分区。而宽依赖则需要首先计算好所有父分区数据，然后在节点之间进行Shuffle。窄依赖能够更有效地进行失效节点的恢复，重新计算丢失RDD分区的父分区，而且不同节点之间可以并行计算；而对于一个宽依赖关系的Lineage图，单个节点失效可能导致这个RDD的所有祖先丢失部分分区，因而需要整体重新计算。</p>
+<h2 id="RDD特征"><a href="#RDD特征" class="headerlink" title="RDD特征"></a>RDD特征</h2><p>同时RDD有五个特征，其中分区，一系列的依赖关系和函数是三个基本特征，最佳位置和分区策略是可选。RDD是移动计算而不是移动数据。<br>RDD和spark之间，RDD是一种具有容错性基于内存的集群计算抽象方法，Spark则是这个抽象方法的实现。</p>
 <h2 id="RDD与Mapreduce"><a href="#RDD与Mapreduce" class="headerlink" title="RDD与Mapreduce"></a>RDD与Mapreduce</h2><p>Hadoop Mapreduce<br>1.不适于大量的迭代<br>2.不适于交互式查询<br>基于数据流方式不能复用曾经的结果或中间计算结果<br>RDD<br>1.自动进行内存，磁盘切换<br>2.高效容错<br>3.Task失败，会进行特定次数的重试<br>4.Stage失败，会自动进行特定次数的重试<br>5.只会计算失败的分片<br>6.checkpoint persist<br>7.数据分配的高度弹性 </p>
 <h2 id="RDD为何高效"><a href="#RDD为何高效" class="headerlink" title="RDD为何高效"></a>RDD为何高效</h2><p>RDD是不可变集合类型，且操作为lazy<br>RDD的写操作为粗粒度，读操作可以是粗粒度也可为细粒度<br>所有的RDD操作都返回迭代器，可以让框架集成 </p>
 <h2 id="创建RDD"><a href="#创建RDD" class="headerlink" title="创建RDD"></a>创建RDD</h2><p>1.集合创建<br>程序中一个已有的集合传给SparkContext的parallelize()<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Scala创建</span><br><span class="line">val lines=sc.parallelize(List(<span class="string">"padas"</span>,<span class="string">"i like padas"</span>))</span><br><span class="line"></span><br><span class="line">Java创建</span><br><span class="line">JavaRDD&lt;String&gt; lines=sc.parallelize(Arrays.asList(<span class="string">"padas"</span>,<span class="string">"i like padas"</span>))</span><br></pre></td></tr></table></figure></p>
