@@ -23,7 +23,8 @@
 <meta property="og:site_name" content="lish's blog">
 <meta property="og:description" content="运行内幕1.Driver创建DAGScheduler,TaskScheduler,在实例化过程中，注册当前程序给master,master接受注册，分配资源；一般情况下，当通过Action触发job,SparkContext会通过DAGScheduler来把job中的RDD构成的DAG划分为不同的Stage，每个Stage内部是一系列业务逻辑完全相同，处理数据不同的Tasks，构成TaskSet,">
 <meta property="og:image" content="http://yoursite.com/images/spark整体架构.png">
-<meta property="og:updated_time" content="2016-05-16T07:39:49.936Z">
+<meta property="og:image" content="http://yoursite.com/images/Spark程序.png">
+<meta property="og:updated_time" content="2016-06-07T07:36:51.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark-运行内幕 | lish's blog">
 <meta name="twitter:description" content="运行内幕1.Driver创建DAGScheduler,TaskScheduler,在实例化过程中，注册当前程序给master,master接受注册，分配资源；一般情况下，当通过Action触发job,SparkContext会通过DAGScheduler来把job中的RDD构成的DAG划分为不同的Stage，每个Stage内部是一系列业务逻辑完全相同，处理数据不同的Tasks，构成TaskSet,">
@@ -233,7 +234,7 @@ classes that you can use:
 <h3 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h3><p>一个Stage包含一到多个Task，通过多个Task实现并行运行的功能</p>
 <h3 id="DAGScheduler"><a href="#DAGScheduler" class="headerlink" title="DAGScheduler"></a>DAGScheduler</h3><p>实现将Spark作业分解成一到多个Stage，每个Stage根据RDD的Partition个数决定Task的个数，然后生成相应的Task set放到TaskScheduler中。</p>
 <h3 id="TaskScheduler"><a href="#TaskScheduler" class="headerlink" title="TaskScheduler"></a>TaskScheduler</h3><p>实现Task分配到Executor上执行</p>
-<h3 id="Driver"><a href="#Driver" class="headerlink" title="Driver"></a>Driver</h3><p>一个Spark作业运行时包括一个Driver进程，也是作业的主进程，负责作业的解析、生成Stage并调度Task到Executor上。包括DAGScheduler，TaskScheduler。与执行器节点进行通信，执行器节点作为独立的java进程进行。<br>Driver对应SparkConf SparkContext</p>
+<h3 id="Driver"><a href="#Driver" class="headerlink" title="Driver"></a>Driver</h3><p>一个Spark作业运行时包括一个Driver进程，也是作业的主进程，负责作业的解析、生成Stage并调度Task到Executor上。包括DAGScheduler，TaskScheduler。与执行器节点进行通信，执行器节点作为独立的java进程进行。<br>Driver对应SparkConf SparkContext<br><img src="/images/Spark程序.png" alt="spark应用程序"></p>
 <h2 id="作业执行"><a href="#作业执行" class="headerlink" title="作业执行"></a>作业执行</h2><h3 id="Driver运行在客户端"><a href="#Driver运行在客户端" class="headerlink" title="Driver运行在客户端"></a>Driver运行在客户端</h3><p>客户端启动后直接运行用户程序，启动Driver相关的工作：DAGScheduler和BlockManagerMaster等。 客户端的Driver向Master注册。 Master还会让Worker启动Exeuctor。Worker创建一个ExecutorRunner线程，ExecutorRunner会启动ExecutorBackend进程。 ExecutorBackend启动后会向Driver的SchedulerBackend注册。Driver的DAGScheduler解析作业并生成相应的Stage，每个Stage包含的Task通过TaskScheduler分配给Executor执行。 所有stage都完成后作业结束。</p>
 <h3 id="Driver（作业的master，负责作业的解析、生成stage并调度task到，包含DAGScheduler）运行在Worker"><a href="#Driver（作业的master，负责作业的解析、生成stage并调度task到，包含DAGScheduler）运行在Worker" class="headerlink" title="Driver（作业的master，负责作业的解析、生成stage并调度task到，包含DAGScheduler）运行在Worker"></a>Driver（作业的master，负责作业的解析、生成stage并调度task到，包含DAGScheduler）运行在Worker</h3><p>客户端提交作业给Master Master让一个Worker启动Driver，即SchedulerBackend。Worker创建一个DriverRunner线程，DriverRunner启动SchedulerBackend进程。 另外Master还会让其余Worker启动Exeuctor，即ExecutorBackend。Worker创建一个ExecutorRunner线程，ExecutorRunner会启动ExecutorBackend进程。 ExecutorBackend启动后会向Driver的SchedulerBackend注册。SchedulerBackend进程中包含DAGScheduler，它会根据用户程序，生成执行计划，并调度执行。对于每个stage的task，都会被存放到TaskScheduler中，ExecutorBackend向SchedulerBackend汇报的时候把TaskScheduler中的task调度到ExecutorBackend执行。 所有stage都完成后作业结束。</p>
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>一个应用对应多个job，一个action对应一个job<br>worker不会与master汇报资源，分配时已记录</p>
