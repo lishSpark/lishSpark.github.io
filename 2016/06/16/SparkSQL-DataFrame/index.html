@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      SparkSQL-DataFrame | lish&#39;s blog 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="lish">
+    
+    
+
+    <meta name="description" content="DataFrameDataFrame让Spark具备了处理大规模结构化数据的能力，在比原有的RDD转化方式易用的前提下，计算性能更还快了两倍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SparkSQL-DataFrame | lish's blog">
+<meta property="og:url" content="http://yoursite.com/2016/06/16/SparkSQL-DataFrame/index.html">
+<meta property="og:site_name" content="lish's blog">
+<meta property="og:description" content="DataFrameDataFrame让Spark具备了处理大规模结构化数据的能力，在比原有的RDD转化方式易用的前提下，计算性能更还快了两倍">
+<meta property="og:updated_time" content="2016-06-16T06:49:10.028Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SparkSQL-DataFrame | lish's blog">
+<meta name="twitter:description" content="DataFrameDataFrame让Spark具备了处理大规模结构化数据的能力，在比原有的RDD转化方式易用的前提下，计算性能更还快了两倍">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">lish&#39;s blog</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          welcome to here
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/loveCanopy" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">SparkSQL-DataFrame</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-06-16" class="post-meta__date date">2016-06-16</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Spark/">Spark</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/DataFrame/">DataFrame</a>, <a class="tags-link" href="/tags/SQL/">SQL</a>, <a class="tags-link" href="/tags/Spark开发/">Spark开发</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h1 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h1><p>DataFrame让Spark具备了处理大规模结构化数据的能力，在比原有的RDD转化方式易用的前提下，计算性能更还快了两倍<br><a id="more"></a></p>
+<h2 id="构建DataFrame"><a href="#构建DataFrame" class="headerlink" title="构建DataFrame"></a>构建DataFrame</h2><h3 id="通过反射机制"><a href="#通过反射机制" class="headerlink" title="通过反射机制"></a>通过反射机制</h3><p>Spark SQL的scala接口支持把RDD自动转换为DataFrame<br>people.txt数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">michael,<span class="number">23</span></span><br><span class="line">andy,<span class="number">20</span></span><br><span class="line">jsutin,<span class="number">18</span></span><br></pre></td></tr></table></figure></p>
+<p>首先定义样本类<br>加载数据，使用map映射到样本类，得到RDD<br>RDD转化为DataFrame<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">case</span> class <span class="title">people</span><span class="params">(name:String,age:Int)</span></span><br><span class="line">val rdd</span>=sc.textFile(<span class="string">"people.txt"</span>).map(_.split(<span class="string">","</span>)).map(p=&gt;people(p(<span class="number">0</span>),p(<span class="number">1</span>).trim.toInt))</span><br><span class="line">val people=rdd.toDF()</span><br></pre></td></tr></table></figure></p>
+<h3 id="编程指定"><a href="#编程指定" class="headerlink" title="编程指定"></a>编程指定</h3><p>1.加载文件，并构建文件对应的Schema的列名字符串<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val other_people=sc.textFile(<span class="string">"e:\\mllib\\SogouQ1.txt"</span>,<span class="number">1</span>)</span><br><span class="line">val schemaString=<span class="string">"date session name s_seq c_seq uri"</span></span><br></pre></td></tr></table></figure></p>
+<p>2.构建Schema信息<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.sql.types._</span><br><span class="line">     val schema=StructType(</span><br><span class="line">         schemaString.split(<span class="string">" "</span>).map &#123; fieldName =&gt; StructField(fieldName,StringType,<span class="keyword">true</span>) &#125;</span><br><span class="line">     )</span><br></pre></td></tr></table></figure></p>
+<p>3.将RDD的字符串元素转换为DataFrame的Row类型<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val rowRDD=other_people.map &#123;_.split(<span class="string">"\t"</span>)  &#125;.map &#123; p =&gt; Row(p(<span class="number">0</span>),p(<span class="number">1</span>),p(<span class="number">2</span>),p(<span class="number">3</span>),p(<span class="number">4</span>),p(<span class="number">5</span>)) &#125;</span><br></pre></td></tr></table></figure></p>
+<p>4.应用之前定义的schema 创建DataFrame<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val peopleDataFrame=sqlcontext.createDataFrame(rowRDD, schema)</span><br></pre></td></tr></table></figure></p>
+<h3 id="json文件和parquet文件"><a href="#json文件和parquet文件" class="headerlink" title="json文件和parquet文件"></a>json文件和parquet文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val dff=sqlcontext.read.parquet(<span class="string">"path"</span>)</span><br><span class="line">val dff=sqlcontext.read.json(<span class="string">"path"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="相关API"><a href="#相关API" class="headerlink" title="相关API"></a>相关API</h2><p>people.json<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"michale"</span>,<span class="string">"job number"</span>:<span class="string">"001"</span>,<span class="string">"age"</span>:<span class="number">33</span>,<span class="string">"gender"</span>:<span class="string">"male"</span>,<span class="string">"salary"</span>:<span class="number">233</span>,<span class="string">"deptid"</span>:<span class="number">1</span>&#125;</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"jack"</span>,<span class="string">"job number"</span>:<span class="string">"002"</span>,<span class="string">"age"</span>:<span class="number">23</span>,<span class="string">"gender"</span>:<span class="string">"male"</span>,<span class="string">"salary"</span>:<span class="number">2233</span>,<span class="string">"deptid"</span>:<span class="number">2</span>&#125;</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"rose"</span>,<span class="string">"job number"</span>:<span class="string">"003"</span>,<span class="string">"age"</span>:<span class="number">13</span>,<span class="string">"gender"</span>:<span class="string">"female"</span>,<span class="string">"salary"</span>:<span class="number">2330</span>,<span class="string">"deptid"</span>:<span class="number">3</span>&#125;</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"peter"</span>,<span class="string">"job number"</span>:<span class="string">"004"</span>,<span class="string">"age"</span>:<span class="number">53</span>,<span class="string">"gender"</span>:<span class="string">"male"</span>,<span class="string">"salary"</span>:<span class="number">233</span>,<span class="string">"deptid"</span>:<span class="number">1</span>&#125;</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"betty"</span>,<span class="string">"job number"</span>:<span class="string">"005"</span>,<span class="string">"age"</span>:<span class="number">33</span>,<span class="string">"gender"</span>:<span class="string">"female"</span>,<span class="string">"salary"</span>:<span class="number">2033</span>,<span class="string">"deptid"</span>:<span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>new_people.json<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"michale"</span>,<span class="string">"job number"</span>:<span class="string">"001"</span>,<span class="string">"age"</span>:<span class="number">33</span>,<span class="string">"gender"</span>:<span class="string">"male"</span>,<span class="string">"salary"</span>:<span class="number">233</span>,<span class="string">"deptid"</span>:<span class="number">1</span>&#125;</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"jack"</span>,<span class="string">"job number"</span>:<span class="string">"002"</span>,<span class="string">"age"</span>:<span class="number">23</span>,<span class="string">"gender"</span>:<span class="string">"male"</span>,<span class="string">"salary"</span>:<span class="number">2233</span>,<span class="string">"deptid"</span>:<span class="number">2</span>&#125;</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"rose"</span>,<span class="string">"job number"</span>:<span class="string">"003"</span>,<span class="string">"age"</span>:<span class="number">13</span>,<span class="string">"gender"</span>:<span class="string">"female"</span>,<span class="string">"salary"</span>:<span class="number">2330</span>,<span class="string">"deptid"</span>:<span class="number">3</span>&#125;</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"peter_new"</span>,<span class="string">"job number"</span>:<span class="string">"006"</span>,<span class="string">"age"</span>:<span class="number">33</span>,<span class="string">"gender"</span>:<span class="string">"male"</span>,<span class="string">"salary"</span>:<span class="number">1233</span>,<span class="string">"deptid"</span>:<span class="number">3</span>&#125;</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"betty_new"</span>,<span class="string">"job number"</span>:<span class="string">"007"</span>,<span class="string">"age"</span>:<span class="number">23</span>,<span class="string">"gender"</span>:<span class="string">"female"</span>,<span class="string">"salary"</span>:<span class="number">2033</span>,<span class="string">"deptid"</span>:<span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>department.json<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"Development"</span>,<span class="string">"deptid"</span>:<span class="number">1</span>&#125;</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"Person Dept"</span>,<span class="string">"deptid"</span>:<span class="number">2</span>&#125;</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"Testing dept"</span>,<span class="string">"deptid"</span>:<span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>val people=sqlcontext.read.json(“e:\mllib\people.json”)<br>查询操作<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">people.filter($<span class="string">"age"</span>&gt;<span class="number">19</span>)..show()</span><br><span class="line">people.filter(<span class="string">"gender='male'"</span>).show()</span><br><span class="line">people.where($<span class="string">"name"</span>===<span class="string">"jack"</span>).show()</span><br></pre></td></tr></table></figure></p>
+<p>排序<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">people.sort($<span class="string">"job number"</span>.asc,$<span class="string">"salary"</span>.desc).show()</span><br></pre></td></tr></table></figure></p>
+<p>增加列<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">people.withColumn(<span class="string">"level"</span>, people(<span class="string">"age"</span>)/<span class="number">10</span>).show()</span><br><span class="line">people.withColumn(<span class="string">"per"</span>,people(<span class="string">"salary"</span>)/<span class="number">100</span>).show()</span><br></pre></td></tr></table></figure></p>
+<p>修改列名<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val rnDept=people.withColumnRenamed(<span class="string">"salary"</span>, <span class="string">"sal"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>合并俩个数据集<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val new_people=sqlcontext.read.json(<span class="string">"e:\\mllib\\new_people.json"</span>)</span><br><span class="line">people.unionAll(new_people).show()</span><br></pre></td></tr></table></figure></p>
+<p>查询同名员工的数目<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val namecount=people.unionAll(new_people).groupBy($<span class="string">"name"</span>).count</span><br><span class="line">namecount.show()</span><br></pre></td></tr></table></figure></p>
+<p>分组统计信息<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">val aggnumber=people.groupBy(<span class="string">"job number"</span>).agg(Map(</span><br><span class="line">     <span class="string">"age"</span> -&gt;<span class="string">"max"</span>,</span><br><span class="line">     <span class="string">"gender"</span>-&gt;<span class="string">"count"</span></span><br><span class="line">     ))</span><br><span class="line">aggnumber.show()</span><br></pre></td></tr></table></figure></p>
+<p>名字去重<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">people.unionAll(new_people).select(<span class="string">"name"</span>).distinct().show()</span><br></pre></td></tr></table></figure></p>
+<p>差集<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">people.select(<span class="string">"name"</span>).except(new_people.select(<span class="string">"name"</span>)).show()</span><br></pre></td></tr></table></figure></p>
+<p>交集<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">people.select(<span class="string">"name"</span>).intersect(new_people.select(<span class="string">"name"</span>)).show()</span><br></pre></td></tr></table></figure></p>
+<p>俩个dataframe的外连接<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val dept=sqlcontext.read.json(<span class="string">"e:\\mllib\\department.json"</span>)</span><br><span class="line">people.join(dept, people(<span class="string">"deptid"</span>)===dept(<span class="string">"deptid"</span>),<span class="string">"outer"</span>).show()</span><br></pre></td></tr></table></figure></p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/06/16/SparkSQL-DataFrame/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"yujie"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
