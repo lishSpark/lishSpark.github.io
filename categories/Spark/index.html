@@ -200,6 +200,26 @@ classes that you can use:
     <li>
 
       <h2 class="post-list__post-title post-title">
+        <a href="/2016/06/20/SparkStreaming/" title="link to SparkStreaming">SparkStreaming</a>
+      </h2>
+
+      <div class="post-list__meta">
+
+        <time datetime="2016-06-20" class="post-list__meta--date date">2016-06-20</time> 
+      </div>
+
+      <div class="excerpt">
+        
+          <h1 id="Spark-Streaming"><a href="#Spark-Streaming" class="headerlink" title="Spark Streaming"></a>Spark Streaming</h1><p>构建在Spark上的实时计算框架，实现高吞吐量，容错机制的实时流数据处理。<br>
+        
+      </div>
+
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
+
+      <h2 class="post-list__post-title post-title">
         <a href="/2016/06/16/SparkSQL-DataFrame/" title="link to SparkSQL-DataFrame">SparkSQL-DataFrame</a>
       </h2>
 
@@ -372,26 +392,6 @@ classes that you can use:
       <div class="excerpt">
         
           <h1 id="运行内幕"><a href="#运行内幕" class="headerlink" title="运行内幕"></a>运行内幕</h1><p>1.Driver创建DAGScheduler,TaskScheduler,在实例化过程中，注册当前程序给master,master接受注册，分配资源；一般情况下，当通过Action触发job,SparkContext会通过DAGScheduler来把job中的RDD构成的DAG划分为不同的Stage，每个Stage内部是一系列业务逻辑完全相同，处理数据不同的Tasks，构成TaskSet,而TaskScheduler和SchedulerBackend负责具体Task运行。<br><img src="/images/Spark运行.png" alt="spark运行架构" title="Spark运行"><br>
-        
-      </div>
-
-      <hr class="post-list__divider" />
-    </li>
-    
-    <li>
-
-      <h2 class="post-list__post-title post-title">
-        <a href="/2016/05/11/Spark-wordcount/" title="link to Spark-wordcount">Spark-wordcount</a>
-      </h2>
-
-      <div class="post-list__meta">
-
-        <time datetime="2016-05-11" class="post-list__meta--date date">2016-05-11</time> 
-      </div>
-
-      <div class="excerpt">
-        
-          <h1 id="Scala开发Spark"><a href="#Scala开发Spark" class="headerlink" title="Scala开发Spark"></a>Scala开发Spark</h1><h2 id="jar包下载"><a href="#jar包下载" class="headerlink" title="jar包下载"></a>jar包下载</h2><p>在spark-1.6.1-bin-hadoop2.6找到spark-assembly-1.6.1-hadoop2.6.0.jar放到Scala的环境配置中<br>
         
       </div>
 
