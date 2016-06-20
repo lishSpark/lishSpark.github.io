@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://yoursite.com/images/DStream内部处理.png">
 <meta property="og:image" content="http://yoursite.com/images/运行场景.png">
 <meta property="og:image" content="http://yoursite.com/images/window.png">
-<meta property="og:updated_time" content="2016-06-20T11:21:58.057Z">
+<meta property="og:updated_time" content="2016-06-20T11:25:14.392Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SparkStreaming | lish's blog">
 <meta name="twitter:description" content="Spark Streaming构建在Spark上的实时计算框架，实现高吞吐量，容错机制的实时流数据处理。">
@@ -243,6 +243,7 @@ classes that you can use:
 <p>1.win1=time0+time1+time2+time3    win2=time3+time4+time5<br>2.win2=win1+time4+time5-time1-time2<br>当滑动时间间隔远小于窗口长度是，前后俩个窗口时间片交集就越多，第二种方法对应得性能更高。</p>
 <h2 id="持久化和容错"><a href="#持久化和容错" class="headerlink" title="持久化和容错"></a>持久化和容错</h2><h3 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h3><p>– 允许用户调用 persist 来持久化<br>默认的持久化： MEMORY_ONLY_SER<br>对于来自网络的数据源 (Kafka, Flume, sockets 等 ) ： MEMORY_AND_DISK_SER_2<br>– 对于 window 和 stateful 操作默认持久化</p>
 <h3 id="checkpoint"><a href="#checkpoint" class="headerlink" title="checkpoint"></a>checkpoint</h3><p> – 对于 window 和 stateful 操作必须 checkpoint<br> – 通过 StreamingContext 的 checkpoint 来指定目录<br> – 通过 DStream 的 checkpoint 指定间隔时间<br> – 间隔必须是 slide interval 的倍数</p>
+<p>参考链接This is an <a href="http://www.cnblogs.com/hnrainll/p/3514637.html" target="_blank" rel="external">参考链接</a>.</p>
 
   </section>
 
